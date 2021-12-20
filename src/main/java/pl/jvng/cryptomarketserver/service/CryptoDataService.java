@@ -17,8 +17,15 @@ import java.util.stream.Collectors;
 @Service
 public class CryptoDataService {
 
+    public List<CryptoPrice> fetchCryptoPrices(List<Crypto> cryptos) {
+        return cryptos.parallelStream()
+                .map(this::fetchCryptoPrice)
+                .collect(Collectors.toList());
+    }
+
     public CryptoPrice fetchCryptoPrice(Crypto crypto) {
         Document document = initDocument(crypto.getDataSourceUrl());
+        log.info("starting fetching: " + crypto.getName());
         return CryptoPrice.builder()
                 .crypto(crypto)
                 .price(extractPrice(document.getElementsByClass("priceTitle").text()))
@@ -28,12 +35,6 @@ public class CryptoDataService {
                 .volume(extractPrice(document.getElementsByClass("statsValue").text().split(" ")[2]))
                 .date(LocalDate.now())
                 .build();
-    }
-
-    public List<CryptoPrice> fetchCryptoPrices(List<Crypto> cryptos) {
-        return cryptos.stream()
-                .map(this::fetchCryptoPrice)
-                .collect(Collectors.toList());
     }
 
     private Document initDocument(String url) {
