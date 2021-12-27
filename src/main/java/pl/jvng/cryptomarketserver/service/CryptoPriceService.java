@@ -1,5 +1,6 @@
 package pl.jvng.cryptomarketserver.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,12 +14,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Slf4j
 @Service
-public class CryptoDataService {
+public class CryptoPriceService {
 
-    public List<CryptoPrice> fetchCryptoPrices(List<Crypto> cryptos) {
-        return cryptos.parallelStream()
+    private final CryptoService cryptoService;
+
+    public List<CryptoPrice> fetchCryptoPrices() {
+        return cryptoService.getCryptos().parallelStream()
                 .map(this::fetchCryptoPrice)
                 .collect(Collectors.toList());
     }

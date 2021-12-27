@@ -1,24 +1,22 @@
 package pl.jvng.cryptomarketserver.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.jvng.cryptomarketserver.model.CryptoPrice;
-import pl.jvng.cryptomarketserver.repository.CryptoRepository;
-import pl.jvng.cryptomarketserver.service.CryptoDataService;
-
-import java.util.List;
+import pl.jvng.cryptomarketserver.model.Crypto;
+import pl.jvng.cryptomarketserver.service.CryptoService;
 
 @AllArgsConstructor
 @RequestMapping("crypto")
 @RestController
 public class CryptoController {
 
-    private CryptoDataService cryptoDataService;
+    private final CryptoService cryptoService;
 
-    @GetMapping()
-    public List<CryptoPrice> getAllCryptoPrices() {
-        return cryptoDataService.fetchCryptoPrices(CryptoRepository.getCryptos());
+    @PostMapping()
+    public ResponseEntity<?> addCrypto(Crypto crypto) {
+        return cryptoService.addCrypto(crypto);
     }
 }
