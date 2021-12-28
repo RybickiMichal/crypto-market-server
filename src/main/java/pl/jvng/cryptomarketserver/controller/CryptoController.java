@@ -3,6 +3,7 @@ package pl.jvng.cryptomarketserver.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jvng.cryptomarketserver.model.Crypto;
@@ -16,7 +17,7 @@ public class CryptoController {
     private final CryptoService cryptoService;
 
     @PostMapping()
-    public ResponseEntity<?> addCrypto(Crypto crypto) {
+    public ResponseEntity<?> addCrypto(@RequestBody Crypto crypto) {
         return cryptoService.addCrypto(crypto);
     }
 }
