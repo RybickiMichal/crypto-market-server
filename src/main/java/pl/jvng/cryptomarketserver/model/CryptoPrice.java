@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -26,16 +26,16 @@ public class CryptoPrice {
 
     @ManyToOne
     private Crypto crypto;
-    private LocalDate date;
+    private LocalDateTime time;
     private BigDecimal price;
     private BigDecimal marketCap;
     private BigDecimal volume;
     private BigDecimal low;
     private BigDecimal high;
 
-    public CryptoPrice(Crypto crypto, LocalDate date, BigDecimal price, BigDecimal marketCap, BigDecimal volume, BigDecimal low, BigDecimal high) {
+    public CryptoPrice(Crypto crypto, LocalDateTime time, BigDecimal price, BigDecimal marketCap, BigDecimal volume, BigDecimal low, BigDecimal high) {
         this.crypto = crypto;
-        this.date = date;
+        this.time = time;
         this.price = price;
         this.marketCap = marketCap;
         this.volume = volume;
