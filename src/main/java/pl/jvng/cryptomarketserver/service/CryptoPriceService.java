@@ -12,6 +12,7 @@ import pl.jvng.cryptomarketserver.repository.CryptoPriceRepository;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,13 +38,13 @@ public class CryptoPriceService {
         Document document = initDocument(crypto.getDataSourceUrl());
         log.info("starting fetching: " + crypto.getName());
         return CryptoPrice.builder()
-                .crypto(crypto)
+                .cryptoName(crypto.getName())
                 .price(extractPrice(document.getElementsByClass("priceTitle").text()))
                 .low(extractPrice(document.getElementsByClass("n78udj-5 dBJPYV").text().split(" ")[0]))
                 .high(extractPrice(document.getElementsByClass("n78udj-5 dBJPYV").text().split(" ")[1]))
                 .marketCap(extractPrice(document.getElementsByClass("statsValue").text().split(" ")[0]))
                 .volume(extractPrice(document.getElementsByClass("statsValue").text().split(" ")[2]))
-                .time(LocalDateTime.now())
+                .time(new Date())
                 .build();
     }
 
