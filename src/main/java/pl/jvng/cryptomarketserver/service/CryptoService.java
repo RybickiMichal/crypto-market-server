@@ -21,7 +21,6 @@ public class CryptoService {
                 new Crypto("Bitcoin", "https://coinmarketcap.com/currencies/bitcoin/"),
                 new Crypto("Ethereum", "https://coinmarketcap.com/currencies/ethereum/"),
                 new Crypto("Binance Coin", "https://coinmarketcap.com/currencies/binance-coin/"),
-                new Crypto("Tether", "https://coinmarketcap.com/currencies/tether/"),
                 new Crypto("Solana", "https://coinmarketcap.com/currencies/solana/"),
                 new Crypto("Cardano", "https://coinmarketcap.com/currencies/cardano/")
         );

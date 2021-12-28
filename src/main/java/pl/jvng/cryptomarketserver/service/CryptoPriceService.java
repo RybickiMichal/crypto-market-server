@@ -7,6 +7,7 @@ import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 import pl.jvng.cryptomarketserver.model.Crypto;
 import pl.jvng.cryptomarketserver.model.CryptoPrice;
+import pl.jvng.cryptomarketserver.repository.CryptoPriceRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,8 +21,13 @@ import java.util.stream.Collectors;
 public class CryptoPriceService {
 
     private final CryptoService cryptoService;
+    private final CryptoPriceRepository cryptoPriceRepository;
 
-    public List<CryptoPrice> fetchCryptoPrices() {
+    public void saveCryptoPricesToDatabase(List<CryptoPrice> cryptoPrices) {
+        cryptoPriceRepository.saveAll(cryptoPrices);
+    }
+
+    public List<CryptoPrice> fetchAllCryptoPrices() {
         return cryptoService.getCryptos().parallelStream()
                 .map(this::fetchCryptoPrice)
                 .collect(Collectors.toList());
