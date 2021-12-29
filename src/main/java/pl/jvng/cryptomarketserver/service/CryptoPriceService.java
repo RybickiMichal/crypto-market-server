@@ -28,6 +28,12 @@ public class CryptoPriceService {
         cryptoPriceRepository.saveAll(cryptoPrices);
     }
 
+    public List<CryptoPrice> getAllCryptoPrices() {
+        List<CryptoPrice> cryptoPrices = cryptoPriceRepository.findAll();
+        log.info("found {} prices", cryptoPrices.size());
+        return cryptoPrices;
+    }
+
     public List<CryptoPrice> fetchAllCryptoPrices() {
         return cryptoService.getCryptos().parallelStream()
                 .map(this::fetchCryptoPrice)
