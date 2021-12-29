@@ -18,6 +18,6 @@ public class CryptoPriceController {
 
     @GetMapping()
     public List<CryptoPrice> getAllCryptoPrices() {
-        return cryptoPriceService.fetchAllCryptoPrices();
+        return cryptoPriceService.getAllCryptoPrices();
     }
 }
